@@ -12,13 +12,16 @@ def get_letters(word):
 def json_to_list(filepath):
     with open(filepath) as f:
         dict = json.load(f)
-    return [word.encode("utf-8") for word in dict]
+    return [word.lower().encode("utf-8") for word in dict]
 
 # generated_solution is the solution returned by the solve() method
 def compare_solutions(generated_solution, path_to_actual_solution):
     actual_solution = set(json_to_list(path_to_actual_solution))
     generated_solution = set(generated_solution)
-    return list(generated_solution.difference(actual_solution))
+    print("Words the solver found that aren't in the solution:")
+    print list(generated_solution.difference(actual_solution))
+    print ("Words that are in the solution that the solver didn't find:")
+    print list(actual_solution.difference(generated_solution))
 
 # Generates a dict where the key is a string of the unique, alphabetized letters
 # in the word, and the key is the list of all words using that letterself. For
