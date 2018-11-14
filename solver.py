@@ -12,8 +12,12 @@ def get_letters(word):
 def json_to_list(filepath):
     with open(filepath) as f:
         dict = json.load(f)
-    dict_list = list(dict.keys())
-    return [word.encode("utf-8") for word in dict_list]
+    return [word.encode("utf-8") for word in dict]
+
+def compare_dict_and_solution(spelling_bee, path_to_dict, path_to_solution):
+    dictionary = set(solve(spelling_bee, path_to_dict))
+    solution = set(json_to_list(path_to_solution))
+    return dictionary.difference(solution)
 
 def process_dictionary(path_to_dictionary):
     dictionary = json_to_list(path_to_dictionary)
